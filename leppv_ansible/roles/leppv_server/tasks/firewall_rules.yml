@@ -1,0 +1,20 @@
+- name:  Enable port 80 on firewall to allow access to nginx.
+  firewalld:
+    port: 80/tcp
+    permanent: true
+    state: enabled
+
+- name:  Enable port 8080 on firewall to allow access to varnish.
+  firewalld:
+    port: 8080/tcp
+    permanent: true
+    state: enabled
+
+- name:  Enable port 443 on firewall to allow access to nginx.
+  firewalld:
+    port: 443/tcp
+    permanent: true
+    state: enabled
+
+- name: Reload firewalld
+  shell: firewall-cmd --reload

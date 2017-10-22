@@ -1,0 +1,19 @@
+# APPLICATION path
+application_path: /application/path
+
+permissions_postgress_pg_hba: host        all             all          <your_server_ip>/32          trust 
+
+nginx_listen_port: 8080
+
+nginx_server_name_ip: <your_server_ip>
+
+# VARNISH variables
+varnish_version: 5.2.0
+
+# POSTGRESQL variables
+pgsql_pkg: 96
+pgsql_pkg_version: 96-9.6-3
+pgsql_version: 9.6
+database_name: <your_database_name>
+
+

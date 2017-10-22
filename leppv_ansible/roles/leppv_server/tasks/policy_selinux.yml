@@ -1,0 +1,9 @@
+- name: Install libsemanage-python to change SELinux policy
+  yum: name=libsemanage-python state=present
+  
+#- name: Configure SELinux Policy httpd_can_network_connect_db
+#  seboolean: name=httpd_can_network_connect_db state=yes persistent=yes
+
+- selinux:
+    policy: targeted
+    state: permissive

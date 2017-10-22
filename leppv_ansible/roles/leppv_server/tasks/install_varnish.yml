@@ -1,0 +1,42 @@
+- name: Install varnish
+  yum: name={{ item }} state=present
+  with_items:
+  - autoconf
+  - automake
+  - jemalloc-devel
+  - libedit-devel
+  - libtool
+  - ncurses-devel
+  - pcre-devel
+  - pkgconfig
+  - python-docutils
+  - python-sphinx
+  - graphviz
+   
+- name: Wget the varnish rpm
+  get_url:
+    url: http://varnish-cache.org/_downloads/varnish-{{ varnish_version }}.tgz # https://repo.varnish-cache.org/source/varnish-5.2.0.tar.gz
+    dest: ~/
+
+- unarchive:
+    src: /root/varnish-{{ varnish_version }}.tgz
+    dest: /root/
+    remote_src: True
+
+- name: Execute autogen 
+  command: chdir=/root/varnish-{{ varnish_version }}/ sh autogen.sh
+
+- name: Execute configure config.sh 
+  command: chdir=/root/varnish-{{ varnish_version }}/ sh configure
+                      
+- name: Execute make to compile varnish
+  command: chdir=/root/varnish-{{ varnish_version }}/ make 
+
+- name: Execute make install
+  command: chdir=/root/varnish-{{ varnish_version }}/ make install
+
+- name: Execute ldconfig
+  shell: ldconfig chdir=/root/varnish-{{ varnish_version }}/
+
+- name: Run varnish daemon
+  shell: /usr/local/sbin/varnishd -a :80 -b localhost:8080

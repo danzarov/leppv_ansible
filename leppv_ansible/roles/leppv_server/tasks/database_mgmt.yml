@@ -1,0 +1,11 @@
+- name: Create application database
+  postgresql_db: 
+    name: "{{ database_name }}"
+
+- name: Send the sql script to be run on the server
+  template: src=templates/db_file.sql.j2 dest=/tmp/db_file.sql mode=0777
+
+- name: Run the sql script
+  become: true
+  become_user: postgres
+  shell: psql {{ database_name }} < /tmp/db_file.sql

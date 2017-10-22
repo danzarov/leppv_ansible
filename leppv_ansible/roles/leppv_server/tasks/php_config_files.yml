@@ -1,0 +1,5 @@
+- name: Send pre-configured php.ini file to the server
+  template: src=templates/php.ini.j2 dest=/etc/php.ini
+
+- name: Send pre-configured php.ini file to the server
+  template: src=templates/www.conf.j2 dest=/etc/php-fpm.d/www.conf

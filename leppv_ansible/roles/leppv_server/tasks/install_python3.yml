@@ -1,0 +1,17 @@
+- name: Install groupinstall development
+  yum: name="@Development tools" state=present
+
+- name: Install zlib-devel
+  yum: name=zlib-devel state=present
+
+- name: Download https://centos7.iuscommunity.org/ius-release.rpm
+  get_url:
+    url: https://centos7.iuscommunity.org/ius-release.rpm
+    dest: /tmp/
+    mode: 0440
+
+- name: Install postgresql repo.
+  shell: yum install ius-release-1.0-15.ius.centos7.noarch.rpm -y chdir=/tmp
+
+- name: Install python36u
+  yum: name=python36u state=present

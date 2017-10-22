@@ -1,0 +1,8 @@
+- name: Start nginx
+  service: name=nginx.service state=started
+
+- name: Enable nginx
+  service: name=nginx.service enabled=yes
+
+- name: Restart nginx.service
+  service: name=nginx.service state=restarted

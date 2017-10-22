@@ -1,0 +1,47 @@
+- include: update_system.yml
+
+- name: Install net-tools
+  yum: name=net-tools state=present
+
+- include: install_pgsql.yml
+
+- include: install_firewalld.yml
+
+- name: Install psycopg2 module
+  yum: name=python-psycopg2 state=present
+
+- include: database_mgmt.yml
+
+- include: install_python3.yml
+
+- include: install_nginx.yml
+
+- include: firewall_rules.yml
+
+- include: nginx_config_files.yml
+
+- include: nginx_mgmt.yml
+
+- include: install_php_related.yml
+
+- include: php_config_files.yml
+
+- include: phpfpm_mgmt.yml
+
+# On the synchronize_application yml file, you should specify the src path where your project folder resides.
+- include: synchronize_application.yml
+
+- include: policy_selinux.yml
+
+- file:
+    path: /var/lib/php/session
+    owner: nginx
+    group: nginx
+    recurse: yes
+    mode: "700"
+
+- include: restart_services.yml
+
+- include: install_varnish.yml
+
+

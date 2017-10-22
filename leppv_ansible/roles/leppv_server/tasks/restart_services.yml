@@ -1,0 +1,5 @@
+- name: Start postgresql.service
+  service: name=php-fpm.service state=restarted
+
+- name: Restart nginx.service
+  service: name=nginx state=restarted

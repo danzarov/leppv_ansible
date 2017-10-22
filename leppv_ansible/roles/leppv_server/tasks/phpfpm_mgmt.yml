@@ -1,0 +1,5 @@
+- name: Start php-fpm.service
+  service: name=php-fpm.service state=started
+
+- name: Enable php-fpm.service
+  service: name=php-fpm.service enabled=yes

@@ -1,0 +1,5 @@
+---
+- hosts: leppv_server
+  remote_user: root
+  roles:
+  - leppv_server

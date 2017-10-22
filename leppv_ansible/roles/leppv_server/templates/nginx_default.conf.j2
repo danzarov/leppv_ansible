@@ -1,0 +1,19 @@
+server {
+    listen       {{ nginx_listen_port }};
+    server_name  {{ nginx_server_name_ip }};
+
+    root   /usr/share/nginx/html;
+    index  index.php index.html index.htm;
+
+    location ~ \.php$ {
+        fastcgi_pass   unix:/var/run/php-fpm/php5-fpm.sock;
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME $document_root$fastcgi_script_name;
+        include        fastcgi_params;
+        #fastcgi_cache SSapp;
+        #fastcgi_cache_valid 200 60m;
+    }
+    charset UTF-8;
+    #error_page  404              /404.html;
+
+}

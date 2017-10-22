@@ -1,0 +1,17 @@
+- name: Install firewalld
+  yum: name=firewalld state=present
+
+- name: Enable firewalld
+  service: name=firewalld enabled=yes
+
+- name: Start firewalld
+  service: name=firewalld state=started
+
+- name:  Enable port 5432 on firewall to allow access to postgresql.
+  firewalld:
+    port: 5432/tcp
+    permanent: true
+    state: enabled
+
+- name: Reload firewalld
+  shell: firewall-cmd --reload
